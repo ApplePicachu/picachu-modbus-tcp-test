@@ -30,11 +30,11 @@ modbusServer.on('write-multiple-registers', writeRegisters);
 function readHoldingRegisters(from, to, reply) {
     console.log('Read holding registers ' + from + '-' + to);
     var currentTime = new Date();
-    const num = Math.round((currentTime.getTime() % 60000) / 1000) * 1000;
+    const num = Math.round((currentTime.getTime() % 60000) / 100) * 100;
     var values = new Array(to - from + 1);
     for (var i = 0; i < (to - from + 1); i++) {
-        console.log(i + " " + ((from + i) % 100));
-        values[i] = ((from + i) % 100);
+        console.log(i + " " + num+(((from + i+1) % 100)));
+        values[i] = num+((from + i+1) % 100);
     }
     console.log(JSON.stringify(values));
     return reply(null, bufferify(values));
