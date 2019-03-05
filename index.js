@@ -34,6 +34,7 @@ function readHoldingRegisters(from, to, reply) {
     var values = new Array(to - from + 1); 
     for (var i = from; i <= to; i++) {
         values[i-from] = num+i-from;
+        console.log(i-from);
     }
     console.log(JSON.stringify(values));
     return reply(null, bufferify(values));
