@@ -33,8 +33,8 @@ function readHoldingRegisters(from, to, reply) {
     const num = Math.round((currentTime.getTime() % 60000) / 100) * 100;
     var values = new Array(to - from + 1);
     for (var i = 0; i < (to - from + 1); i++) {
-        console.log(i + " " + num+(((from + i+1) % 100)));
-        values[i] = num+((from + i+1) % 100);
+        console.log(i + " " + (num + ((from + i + 1) % 100)));
+        values[i] = num + ((from + i + 1) % 100);
     }
     console.log(JSON.stringify(values));
     return reply(null, bufferify(values));
