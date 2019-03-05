@@ -29,21 +29,24 @@ modbusServer.on('write-multiple-registers', writeRegisters);
 
 function readHoldingRegisters(from, to, reply) {
     console.log('Read holding registers ' + from + '-' + to);
+    var currentTime = new Date();
+    const num = Math.round((currentTime.getTime()%60000)/100)*100;
     var values = new Array(to - from + 1); 
-
+    for (var i = from; i <= to; i++) {
+        values[i-from] = num+i-from;
+    }
+    console.log(JSON.stringify(values));
     return reply(null, bufferify(values));
 }
 
 function readCoils(from, to, reply) {
     console.log('Read coils ' + from + '-' + to);
-    var currentTime = new Date();
-    const num = Math.round((currentTime.getTime()%60000)/100)*100;
     var values = new Array(to - from + 1); // anything greater than zero is received as a 1
-    values.fill(0, 0, values.length);//(value, start, end)
-    for (var i = from; i <= to; i++) {
-        values[i-from] = num+i-from;
+    values.fill(1, 0, values.length);//(value, start, end)
+    for (var i = (from % 2); i < values.length; i += 2) {
+        values[i] = 0;
     }
-    console.log(JSON.stringify(values));
+    // console.log(JSON.stringify(values));
     return reply(null, values);
 }
 
