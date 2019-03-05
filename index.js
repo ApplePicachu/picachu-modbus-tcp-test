@@ -37,9 +37,10 @@ function readCoils(from,to,reply) {
     console.log('Read coils '+from+'-'+to);
     var values = []; // anything greater than zero is received as a 1
     values.fill(1, 0, to-from+1);//(value, start, end)
-    for (var i = (from % 2); i < values.length; i+=2){
-        values[i] = 0;
-    }
+        // for (var i = (from % 2); i < values.length; i+=2){
+    //     values[i] = 0;
+    // }
+    console.log(JSON.stringify(values));
     return reply(null,values);
 }
 
