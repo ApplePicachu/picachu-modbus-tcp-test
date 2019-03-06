@@ -46,7 +46,7 @@ function readHoldingRegisters(from, to, reply) {
 function readCoils(from, to, reply) {
     console.log('Read coils ' + from + '-' + to);
     var values = new Array(to - from + 1); // anything greater than zero is received as a 1
-    values.fill(1, 0, values.length);//(value, start, end)
+    values.fill(0, 0, values.length);//(value, start, end)
     // for (var i = (from % 2); i < values.length; i += 2) {
     //     values[i] = 0;
     // }
